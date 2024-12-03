@@ -1,7 +1,7 @@
 {
   "name": "@afone/react-native-antelop",
   "title": "React Native Antelop",
-  "version": "1.17.2",
+  "version": "1.17.3",
   "description": "TODO",
   "main": "index.js",
   "scripts": {
