@@ -67,6 +67,14 @@ android {
     packagingOptions {
         doNotStrip "*/*/libscm.so"
     }
+
+    sourceSets {
+        main {
+            resources {
+                srcDirs += ['libraries']
+            }
+        }
+    }
 }
 
 repositories {
@@ -168,11 +176,24 @@ afterEvaluate { project ->
     }
 
     publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                
+                // Include the libraries directory in the published artifact
+                artifact("$projectDir/libraries/qualif-afone-2.6.8-01.02.00-7cc7308.aar") {
+                    builtBy tasks.getByName("prepare${name.capitalize()}Artifacts")
+                }
+                
+                groupId = 'com.reactnative.antelop'
+                artifactId = 'react-native-antelop'
+                version = '1.0.0'
+            }
+        }
         repositories {
             maven {
                 url = uri("${rootProject.projectDir}/../android/maven")
             }
         }
     }
-
 }
